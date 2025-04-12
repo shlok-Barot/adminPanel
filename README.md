@@ -25,12 +25,11 @@ A full-featured Admin Panel built with **React**, **Vite**, **Redux Toolkit**, *
 - i18next
 - Mock Service Worker (MSW) or any mock API
 
----
-
 yarn install
 # or
 npm install
 
+## Run Project Command
 yarn dev
 # or
 npm run dev
