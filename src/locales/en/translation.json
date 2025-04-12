@@ -1,0 +1,23 @@
+{
+    "login": {
+      "title": "Login to Account",
+      "subtitle": "Please enter your email and password to continue",
+      "email": "Email address:",
+      "password": "Password",
+      "remember": "Remember Password",
+      "forgot": "Forget Password?",
+      "button": "Sign In",
+      "signupRedirect": "Don't have an account? Create Account"
+    },
+    "signup": {
+      "title": "Create an Account",
+      "subtitle": "Create a account to continue",
+      "email": "Email address:",
+      "username": "Username",
+      "password": "Password",
+      "terms": "I accept terms and conditions",
+      "button": "Sign Up",
+      "loginRedirect": "Already have an account? Login"
+    }
+  }
+  
