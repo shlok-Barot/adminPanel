@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { signup } from "../redux/authSlice";
 
 export const Signup = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,7 +19,15 @@ export const Signup = () => {
       alert("Please accept the terms and conditions");
       return;
     }
-    dispatch(signup({ email, username, password }));
+
+    const result = dispatch(signup({ email, username, password }));
+
+    const existingUsers = JSON.parse(localStorage.getItem("mockUsers") || "[]");
+    const alreadyExists = existingUsers.find((u: any) => u.email === email);
+
+    if (!alreadyExists) {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -52,12 +61,6 @@ export const Signup = () => {
               <label className="block text-sm font-medium text-gray-700">
                 Password
               </label>
-              <Link
-                to="/forgot-password"
-                className="text-sm text-blue-500 hover:underline"
-              >
-                Forgot Password?
-              </Link>
             </div>
             <input
               type="password"
@@ -74,7 +77,6 @@ export const Signup = () => {
                 checked={acceptTerms}
                 onChange={(e) => setAcceptTerms(e.target.checked)}
                 className="mr-2"
-                required
               />
               <span className="text-sm text-gray-600">
                 I accept terms and conditions

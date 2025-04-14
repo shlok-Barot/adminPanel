@@ -1,18 +1,29 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "../components/Input";
 import { Button } from "../components/Button";
 import { login } from "../redux/authSlice";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    const result = dispatch(login({ email, password }));
+
+    // If login is successful, navigate
+    const storedUsers = JSON.parse(localStorage.getItem("mockUsers") || "[]");
+    const matchedUser = storedUsers.find(
+      (u: any) => u.email === email && u.password === password
+    );
+
+    if (matchedUser) {
+      navigate("/dashboard");
+    }
   };
 
   return (
